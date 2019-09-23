@@ -1,0 +1,31 @@
+@import './core/variables';
+
+
+.footer{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-content: center;
+    padding: 25px;
+    color: $colorFontFooter;
+    &__text {
+        width: 180px ;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+    }
+    &__link {
+        margin-right: 20px;
+        text-decoration: none;
+        color: aliceblue;
+    }
+    &__logo {
+        width: auto;
+        height: 40px;
+    }
+    &__icon {
+        color: white;
+    }
+}
