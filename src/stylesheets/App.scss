@@ -1,4 +1,6 @@
 @import './core/variables';
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -46,5 +48,11 @@ code {
 .character {
   &__list--list { //lista de resultados
     list-style: none;
+  }
+
+ &__list--item { //character__list--item
+    background-color: $colorBackground-card;
+    color: $colorFont;
+   box-sizing: content-box;
   }
 }
