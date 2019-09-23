@@ -1,15 +1,11 @@
 import React from 'react';
+import Item from './Item';
 
 const List = props =>{
     debugger;
     return(
         <ul className="character__list--list">
-            {props.characters.map(character => {
-                return (
-                    <li key={`RM${character.id}`}>
-                        name : {character.name}
-                    </li>)
-            })}
+            {props.characters.map(character => <Item character={character}/>)}
         </ul>
     )
 }
