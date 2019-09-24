@@ -7,6 +7,7 @@ import Detail from './Detail';
 import '../stylesheets/App.scss';
 import Loader from './Loader';
 import Footer from './Footer';
+import Form from './Form';
 
 class App extends React.Component {
   constructor(props) {
@@ -63,9 +64,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <form className="form__filter">
-          <input type="text" className="form__name" placeholder="Buscar personaje" onChange={this.searchName}></input>
-        </form>
+        <Form searchName={this.searchName} />
         <section className="main">
           <Switch>
             <Route exact path="/" render={this.renderList} />

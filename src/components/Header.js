@@ -1,9 +1,12 @@
 import React from 'react';
-import logo from '../images/Rick_and_Morty_-_logo.png'
+import logo from '../images/Rick_and_Morty_-_logo.png';
+import '../stylesheets/header.scss';
 
-const Header = () =>{
+const Header = () => {
     return (
-        <img src = {logo} alt="Rick y Morty" className="header__logo"/>
+        <div className="header__wrapper">
+            <img src={logo} alt="Rick y Morty" className="header__logo" />
+        </div>
     )
 
 }

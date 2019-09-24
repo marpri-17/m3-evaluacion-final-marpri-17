@@ -1,0 +1,33 @@
+@import './core/variables';
+
+.detail{
+    &__wrapper {
+        margin: 20px;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        background: $colorBackground-card;
+    }
+    &__category {
+        font-weight: bold;
+        &--item {
+            font-weight: 400;
+        }
+        &--wrapper{
+            padding-top: 25px;
+            color: $colorFont;
+            text-align: justify;
+            padding-left: 15px;
+        }
+    }
+    &__navigation {
+        padding: 5px;
+        padding-inline-end: 25px;
+        color: $colorFont;
+        &--wrapper {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

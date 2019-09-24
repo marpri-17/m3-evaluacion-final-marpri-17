@@ -1,0 +1,13 @@
+@import './core/variables';
+
+
+.header {
+    &__wrapper {
+      padding: 20px;
+  
+    }
+    &__logo{
+      max-width: 100%;
+      height: auto;
+    }
+  }

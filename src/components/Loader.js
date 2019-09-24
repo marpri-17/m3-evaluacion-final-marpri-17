@@ -3,8 +3,8 @@ import '../stylesheets/loader.scss';
 
 const Loader = () => {
     return (
-        <div className="loader-6">
-            <div className="loader-6-wrapper">
+        <div className="loader">
+            <div className="loader-wrapper">
                 <span></span>
                 <span></span>
                 <span></span>
