@@ -55,11 +55,10 @@ class App extends React.Component {
 
   handleSelect(ev) {
     const planetSelected = ev.target.value;
-    const filterOrigins = this.state.characters.filter(character => {
-      const origin = character.origin;
-      return origin === planetSelected
-    })
-    return filterOrigins;
+    this.setState({
+      origin: planetSelected,
+    });
+    console.log(planetSelected); // Lifting del select
   }
 
   renderList() {
@@ -116,7 +115,6 @@ class App extends React.Component {
   }
 
   render() {
-    this.filterByOrigin();
     return (
       <div className="App">
         <Header />
