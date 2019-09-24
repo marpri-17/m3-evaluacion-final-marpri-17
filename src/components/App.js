@@ -21,7 +21,7 @@ class App extends React.Component {
     this.renderDetail = this.renderDetail.bind(this)
     this.isSearching = this.isSearching.bind(this);
     this.renderIconDetail = this.renderIconDetail.bind(this);
-
+    this.handleSelect = this.handleSelect.bind(this);
 
 
   }
@@ -41,7 +41,6 @@ class App extends React.Component {
       const characterName = character.name.toLowerCase();
       return characterName.includes(findName);
     });
-    //console.log(searchResults)
     this.setState({
       filterCharacters: searchResults,
     });
@@ -50,21 +49,30 @@ class App extends React.Component {
   isSearching() {
     const { filterCharacters, characters } = this.state;
     const charactersToRender = (this.state.filterCharacters.length !== 0) ? filterCharacters : characters;
-    return charactersToRender
+
+    return charactersToRender;
+  }
+
+  handleSelect(ev) {
+    const planetSelected = ev.target.value;
+    const filterOrigins = this.state.characters.filter(character => {
+      const origin = character.origin;
+      return origin === planetSelected
+    })
+    return filterOrigins;
   }
 
   renderList() {
     return (
       <section className="main">
-        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} />
-        <List characters={this.isSearching()} />
+        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} origins={this.filterByOrigin()} handleSelect={this.handleSelect} />
+        <List characters={this.isSearching()} select={this.handleSelect} />
       </section>
 
     )
   }
 
   renderIconDetail(state) {
-    console.log(state);
     const classToIconAlive = "fas fa-hand-spock";
     const classToIconDead = "fas fa-dizzy";
     const classToIconUnknown = "fas fa-question"
@@ -91,10 +99,24 @@ class App extends React.Component {
       }
     }
     return (foundCharacter) ? <Detail character={foundCharacter} iconToRender={iconToRender} /> : <Loader />
+  }
 
+  filterByOrigin() {
+    const { characters } = this.state;
+    const originChoices = [];
+    if (characters) {
+      characters.map((character) => {
+        if (originChoices.includes(character.origin)) {
+        } else {
+          originChoices.push(character.origin);
+        }
+      });
+    }
+    return originChoices;
   }
 
   render() {
+    this.filterByOrigin();
     return (
       <div className="App">
         <Header />
@@ -109,5 +131,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// {(props) => 

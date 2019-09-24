@@ -1,8 +1,13 @@
 @import './core/variables';
+// .hidden {
+//     display: none;
+// }
 
 .form {
     &__filter {
-        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
         padding: 10px;
         padding-top:0px;
     }
@@ -16,12 +21,12 @@
         border: none;
         text-decoration: none;
         background: $colorBackground-form;
-        transition: all 2s ease-out;
+        transition: all 3.5s ease-out;
         &::placeholder {
             transition: all 2s ease;
         }
         &:focus , &:active {
-            background: #fff;
+            background: $colorBackground-card;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             transform: translateX(5%);
@@ -52,6 +57,30 @@
     &__results{
         padding-inline-start: 50px;
         color: $colorFontFooter;
+    }
+    &__select {
+        width: 300px;
+        max-width: 60%;
+        padding-inline-start: 15px;
+        font-size: 14px;
+        background: $colorBackground-form;
+        transition: background 5s ease;
+            &:hover{
+                background: $colorBackground-card;
+            }
+        &--label{
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            padding: 5px;
+            font-size: 13px;
+            background: $colorBackground-card;
+            text-shadow: 0 1px 0 rgba(19,74,70,.4);
+            transform: translateX(20%);
+            
+        }
     }
 }
 @keyframes aniInputText {

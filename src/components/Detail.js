@@ -4,7 +4,6 @@ import '../stylesheets/detail.scss';
 
 
 const Detail = props => {
-    console.log(props)
     return (
         <React.Fragment>
             <div className="detail__navigation--wrapper">
