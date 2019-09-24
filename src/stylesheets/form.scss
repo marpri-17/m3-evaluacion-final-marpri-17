@@ -53,6 +53,10 @@
             align-self: flex-start;
         }
     }
+    &__results{
+        padding-inline-start: 50px;
+        color: $colorFontFooter;
+    }
 }
 @keyframes aniInputText {
     0% {

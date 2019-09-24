@@ -43,7 +43,13 @@ class App extends React.Component {
   }
 
   renderList() {
-    return <List characters={(this.state.filterCharacters.length !== 0) ? this.state.filterCharacters : this.state.characters} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "No hay resultados"} />
+    return (
+      <section className="main">
+        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "No hay resultados"} />
+        <List characters={(this.state.filterCharacters.length !== 0) ? this.state.filterCharacters : this.state.characters} />
+      </section>
+
+    )
   }
 
   renderDetail(props) {
@@ -64,13 +70,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Form searchName={this.searchName} />
-        <section className="main">
-          <Switch>
-            <Route exact path="/" render={this.renderList} />
-            <Route path="/character/:id" render={this.renderDetail} />
-          </Switch>
-        </section>
+        <Switch>
+          <Route exact path="/" render={this.renderList} />
+          <Route path="/character/:id" render={this.renderDetail} />
+        </Switch>
         < Footer />
       </div>
     );
