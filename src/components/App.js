@@ -19,6 +19,10 @@ class App extends React.Component {
     this.searchName = this.searchName.bind(this);
     this.renderList = this.renderList.bind(this)
     this.renderDetail = this.renderDetail.bind(this)
+    this.isSearching = this.isSearching.bind(this);
+    this.renderIconDetail = this.renderIconDetail.bind(this);
+
+
 
   }
 
@@ -30,6 +34,7 @@ class App extends React.Component {
   }
 
   searchName(ev) {
+    ev.preventDefault();
     const findName = ev.target.value.toLowerCase();
     const { characters } = this.state;
     const searchResults = characters.filter(character => {
@@ -42,27 +47,50 @@ class App extends React.Component {
     });
   }
 
+  isSearching() {
+    const { filterCharacters, characters } = this.state;
+    const charactersToRender = (this.state.filterCharacters.length !== 0) ? filterCharacters : characters;
+    return charactersToRender
+  }
+
   renderList() {
     return (
       <section className="main">
-        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "No hay resultados"} />
-        <List characters={(this.state.filterCharacters.length !== 0) ? this.state.filterCharacters : this.state.characters} />
+        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} />
+        <List characters={this.isSearching()} />
       </section>
 
     )
   }
+
+  renderIconDetail(state) {
+    console.log(state);
+    const classToIconAlive = "fas fa-hand-spock";
+    const classToIconDead = "fas fa-dizzy";
+    const classToIconUnknown = "fas fa-question"
+    if (state === "Alive") {
+      return classToIconAlive
+    } else if (state === "Dead") {
+      return classToIconDead
+    } else {
+      return classToIconUnknown;
+    }
+  }
+
 
   renderDetail(props) {
     debugger;
     const selectedCharacter = parseInt(props.match.params.id);
     const { characters } = this.state;
     let foundCharacter;
+    let iconToRender;
     for (let character of characters) {
       if (character.id === selectedCharacter) {
         foundCharacter = character
+        iconToRender = this.renderIconDetail(character.status);
       }
     }
-    return (foundCharacter) ? <Detail character={foundCharacter} /> : <Loader />
+    return (foundCharacter) ? <Detail character={foundCharacter} iconToRender={iconToRender} /> : <Loader />
 
   }
 

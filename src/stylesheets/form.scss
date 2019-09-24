@@ -25,6 +25,7 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             transform: translateX(5%);
+            padding-inline-start: 30px;
           
             &::placeholder {
                 opacity: 0;
@@ -43,11 +44,6 @@
             text-shadow: 0 1px 0 rgba(19,74,70,.4);
             transform: translateX(70%);
             transition: all 2s ease-in-out;
-            // &:focus , &:active + input {
-            //     transform: translateX(0%)
-            // }
-            //     transform: translateX(0%)
-            // }
         }
         &__wrapper {
             align-self: flex-start;

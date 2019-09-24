@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../stylesheets/detail.scss';
 
+
 const Detail = props => {
-    debugger;
     console.log(props)
     return (
         <React.Fragment>
@@ -18,7 +18,7 @@ const Detail = props => {
                     <div className="detail__category--name-wrapper">
                         <h4 className="detail__category--name">{props.character.name}</h4>
                     </div>
-                    <p className="detail__category">Status: <span className="detail__category--item">{props.character.status}</span></p>
+                    <p className="detail__category">Status: <span className="detail__category--item">{props.character.status}</span><i className={`${props.iconToRender} detail__category--item-icon`}></i></p>
                     <p className="detail__category">Specie: <span className="detail__category--item">{props.character.species}</span></p>
                     <p className="detail__category">Origin: <span className="detail__category--item">{props.character.origin}</span></p>
                     <p className="detail__category">Episodes: <span className="detail__category--item">{props.character.episodes}</span></p>

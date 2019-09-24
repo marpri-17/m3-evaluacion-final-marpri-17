@@ -7,14 +7,19 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
+        justify-content: center;
         background: $colorBackground-card;
     }
     &__category {
         font-weight: bold;
         &--item {
             font-weight: 400;
+            &-icon{
+                margin-left: 5px;
+            }
         }
         &--wrapper{
+            max-width: 70%;
             padding-top: 25px;
             color: $colorFont;
             text-align: justify;
