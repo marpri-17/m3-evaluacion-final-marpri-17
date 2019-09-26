@@ -16,6 +16,7 @@ class App extends React.Component {
       characters: [],
       name: "",
       origin: "",
+      gender: ""
     }
     this.searchName = this.searchName.bind(this);
     this.renderList = this.renderList.bind(this)
@@ -27,11 +28,17 @@ class App extends React.Component {
 
   }
 
+
   componentDidMount() {
+    debugger;
     getDataFromServer()
       .then(getCharacters => this.setState({
         characters: getCharacters
       }));
+    //const savedData = JSON.parse(localStorage.getItem('filter_cache'));
+    // this.setState({
+
+    // })
   }
 
   searchName(ev) {
@@ -44,10 +51,15 @@ class App extends React.Component {
 
   filterResults() {
     const { name, characters, origin } = this.state;
-    const searchResults = characters.filter(character => {
-      return character.name.toLowerCase().includes(name.toLowerCase())
-    })
+    // const dataForSave = {
+    //   name: name,
+    //   origin: origin,
+    // }
+    // localStorage.setItem('filter_cache', JSON.stringify(dataForSave));
+    const searchResults = characters
+      .filter(character => name === "" ? true : character.name.toLowerCase().includes(name.toLowerCase()))
       .filter(character => origin === "" ? true : character.origin === origin);
+    //.filter(character => gender) === "" ? true : character.gender === gender
 
     return searchResults;
 
@@ -65,23 +77,10 @@ class App extends React.Component {
     return (
       <section className="main">
         <Form searchName={this.searchName} searching={(this.state.name.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} origins={this.filterByOrigin()} handleSelect={this.handleSelect} />
-        <List characters={this.filterResults()} select={this.handleSelect} />
+        <List characters={this.filterResults()} />
       </section>
 
     )
-  }
-
-  renderIconDetail(state) {
-    const classToIconAlive = "fas fa-hand-spock";
-    const classToIconDead = "fas fa-dizzy";
-    const classToIconUnknown = "fas fa-question"
-    if (state === "Alive") {
-      return classToIconAlive
-    } else if (state === "Dead") {
-      return classToIconDead
-    } else {
-      return classToIconUnknown;
-    }
   }
 
   renderDetail(props) {
@@ -99,6 +98,19 @@ class App extends React.Component {
     return (foundCharacter) ? <Detail character={foundCharacter} iconToRender={iconToRender} /> : <Loader />
   }
 
+  renderIconDetail(state) {
+    const classToIconAlive = "fas fa-hand-spock";
+    const classToIconDead = "fas fa-dizzy";
+    const classToIconUnknown = "fas fa-question";
+    if (state === "Alive") {
+      return classToIconAlive
+    } else if (state === "Dead") {
+      return classToIconDead
+    } else {
+      return classToIconUnknown;
+    }
+  }
+
   filterByOrigin() {
     const { characters } = this.state;
     const originChoices = [];
@@ -110,6 +122,18 @@ class App extends React.Component {
       });
     }
     return originChoices;
+  }
+  // Checkbox for gender
+  readGender() {
+    const { characters, gender } = this.state;
+    const genders = [];
+    let genderConstructor = characters.map((character) => {
+      if (genders.includes(character.gender)) {
+      } else {
+        return genders.push(character.gender)
+      }
+    })
+    return genders
   }
 
   render() {
