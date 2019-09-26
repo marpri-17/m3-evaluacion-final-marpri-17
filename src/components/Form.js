@@ -1,19 +1,7 @@
 import React from 'react';
 import '../stylesheets/form.scss';
-const renderSelect = (origins, liftingFnc) => {
-    if (origins) {
-        return (
-            <div className="form__select--wrapper">
-                <label className="form__select--label">Planeta</label>
-                <select className="form__select" onChange={liftingFnc}>
-                    {origins.map((origin, index) => {
-                        return (<option className="form__select--item" key={index + origin} value={origin}>{origin}</option>)
-                    })}
-                </select>
-            </div >
-        )
-    }
-}
+import RenderSelect from './Select';
+
 
 const Form = (props) => {
     return (
@@ -26,7 +14,7 @@ const Form = (props) => {
                 <p className="form__results">{props.searching}</p>
             </div>
             <div className="form__input--select">
-                {renderSelect(props.origins, props.handleSelect)}
+                <RenderSelect origins={props.origins} handleSelect={props.handleSelect} />
             </div>
         </form>)
 }

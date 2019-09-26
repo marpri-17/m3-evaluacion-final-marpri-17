@@ -37,4 +37,9 @@
             justify-content: flex-end;
         }
     }
+    &__pic {
+        max-width: 95%;
+        margin-left: 0.4rem;
+        align-self: center;
+    }
 }

@@ -14,12 +14,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       characters: [],
-      filterCharacters: [],
+      name: "",
+      origin: "",
     }
     this.searchName = this.searchName.bind(this);
     this.renderList = this.renderList.bind(this)
     this.renderDetail = this.renderDetail.bind(this)
-    this.isSearching = this.isSearching.bind(this);
+    this.filterResults = this.filterResults.bind(this);
     this.renderIconDetail = this.renderIconDetail.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
 
@@ -35,22 +36,21 @@ class App extends React.Component {
 
   searchName(ev) {
     ev.preventDefault();
-    const findName = ev.target.value.toLowerCase();
-    const { characters } = this.state;
-    const searchResults = characters.filter(character => {
-      const characterName = character.name.toLowerCase();
-      return characterName.includes(findName);
-    });
+    const findName = ev.target.value;
     this.setState({
-      filterCharacters: searchResults,
-    });
+      name: findName,
+    })
   }
 
-  isSearching() {
-    const { filterCharacters, characters } = this.state;
-    const charactersToRender = (this.state.filterCharacters.length !== 0) ? filterCharacters : characters;
+  filterResults() {
+    const { name, characters, origin } = this.state;
+    const searchResults = characters.filter(character => {
+      return character.name.toLowerCase().includes(name.toLowerCase())
+    })
+      .filter(character => origin === "" ? true : character.origin === origin);
 
-    return charactersToRender;
+    return searchResults;
+
   }
 
   handleSelect(ev) {
@@ -64,8 +64,8 @@ class App extends React.Component {
   renderList() {
     return (
       <section className="main">
-        <Form searchName={this.searchName} searching={(this.state.filterCharacters.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} origins={this.filterByOrigin()} handleSelect={this.handleSelect} />
-        <List characters={this.isSearching()} select={this.handleSelect} />
+        <Form searchName={this.searchName} searching={(this.state.name.length !== 0) ? "Resultados" : "Ningún personaje coincide con la búsqueda"} origins={this.filterByOrigin()} handleSelect={this.handleSelect} />
+        <List characters={this.filterResults()} select={this.handleSelect} />
       </section>
 
     )
@@ -83,7 +83,6 @@ class App extends React.Component {
       return classToIconUnknown;
     }
   }
-
 
   renderDetail(props) {
     debugger;
@@ -105,8 +104,7 @@ class App extends React.Component {
     const originChoices = [];
     if (characters) {
       characters.map((character) => {
-        if (originChoices.includes(character.origin)) {
-        } else {
+        if (!originChoices.includes(character.origin)) {
           originChoices.push(character.origin);
         }
       });
