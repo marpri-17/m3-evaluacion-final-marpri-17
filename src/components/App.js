@@ -86,7 +86,6 @@ class App extends React.Component {
 
 
   renderDetail(props) {
-    debugger;
     const selectedCharacter = parseInt(props.match.params.id);
     const { characters } = this.state;
     let foundCharacter;
@@ -104,7 +103,7 @@ class App extends React.Component {
     const { characters } = this.state;
     const originChoices = [];
     if (characters) {
-      characters.map((character) => {
+      characters.forEach((character) => {
         if (originChoices.includes(character.origin)) {
         } else {
           originChoices.push(character.origin);
