@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
-import getDataFromServer from '../services/GetDataFromServer';
+import { getCharactersData, getPictureInfo, test } from '../services/GetDataFromServer';
 import List from './List';
 import Detail from './Detail';
 import '../stylesheets/App.scss';
@@ -27,10 +27,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    getDataFromServer()
+    // getDataFromServer()
+    getCharactersData()
+      .then(charactersList => {
+        console.log(charactersList)
+        this.setState({
+          characters: charactersList
+        })
+      })
+    
+    /* getCharactersData()
+    .then(characters => getPictureInfo(characters))
       .then(getCharacters => this.setState({
         characters: getCharacters
-      }));
+      })); */
   }
 
   searchName(ev) {
