@@ -6,8 +6,8 @@ const urlTmp = "./data.json"
 const url = "https://rickandmortyapi.com/api"
 
 export const formatData = results => {
-    // return Promise.all(
-        return results.results.map(character => {
+    return Promise.all(
+         results.map(character => {
             const newChar = {
                 id: character.id,
                 name: character.name,
@@ -21,7 +21,7 @@ export const formatData = results => {
             getImage(character.url).then(img => newChar.image = img);
         return newChar
     })
-    // )
+    )
 }
 
 const getImage = (url) =>{
@@ -33,8 +33,18 @@ const getImage = (url) =>{
 export const getCharactersData = (page = '1') => {
     return fetch(`${url}/character/?page=${page}`)
         .then(data => data.json())
-
-        .then(data => formatData(data))
+        .then(chars => {
+            const charsList = {
+                pagination: chars.info,
+                chars: chars.results
+            }
+            return charsList
+        })
+        .then(charModel =>{
+            formatData(charModel.chars).then(resp => charModel.chars = resp);
+            return charModel
+        })
+        // .then(data => formatData(data))
         .catch(err => console.log(err))
 }
 

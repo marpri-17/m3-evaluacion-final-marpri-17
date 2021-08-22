@@ -32,7 +32,7 @@ class App extends React.Component {
       .then(charactersList => {
         console.log(charactersList)
         this.setState({
-          characters: charactersList
+          characters: charactersList.chars
         })
       })
     
